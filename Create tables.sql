@@ -1,0 +1,52 @@
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE SCHEMA [BookingConferenceRooms]
+GO
+
+CREATE TABLE [BookingConferenceRooms].[Rooms](
+	[ID] [bigint] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](60) NULL,
+ CONSTRAINT [PK_Rooms_ID] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [BookingConferenceRooms].[Calendar](
+	[ID] [bigint] IDENTITY(1,1) NOT NULL,
+	[Date and time] [datetime] NOT NULL,
+ CONSTRAINT [PK_Calendar_DateAndTime] PRIMARY KEY CLUSTERED 
+(
+	[Date and time] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [BookingConferenceRooms].[Bookings](
+	[ID] [bigint] IDENTITY(1,1) NOT NULL,
+	[ID Room] [bigint] NOT NULL,
+	[Datetime start] [datetime] NOT NULL,
+	[Datetime end] [datetime] NULL,
+	[Note] [nvarchar](255) NULL,
+ CONSTRAINT [PK_LinkRoomsCalendar_IDs] PRIMARY KEY CLUSTERED 
+(
+	[ID Room] ASC,
+	[Datetime start] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [BookingConferenceRooms].[Bookings]  WITH CHECK ADD  CONSTRAINT [FK_Rooms_IDRoom] FOREIGN KEY([ID Room])
+REFERENCES [BookingConferenceRooms].[Rooms] ([ID])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+
+ALTER TABLE [BookingConferenceRooms].[Bookings] CHECK CONSTRAINT [FK_Rooms_IDRoom]
+GO

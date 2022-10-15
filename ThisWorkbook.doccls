@@ -1,0 +1,25 @@
+﻿Option Explicit
+
+Private Sub Workbook_Open()
+
+
+Dim MyMenu As Object
+
+' Init context menus.
+Set MyMenu = Application.ShortcutMenus(xlWorksheetCell).MenuItems.AddMenu(CONTEXT_MENU_NAME, 1)
+     
+With MyMenu.MenuItems
+
+    .Add "Book", "BookARoom", , 1, , ""
+    .Add "Unbook", "unbookARoom", , 2, , ""
+    .Add "Get free rooms", "getFreeRoomsByTime", , 3, , ""
+
+End With
+ 
+Set MyMenu = Nothing
+
+' Init Meeting Rooms Combobox.
+Call initMeetingRoomsComboBox
+
+
+End Sub

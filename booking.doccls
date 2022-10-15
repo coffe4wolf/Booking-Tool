@@ -1,0 +1,17 @@
+﻿Option Explicit
+
+Private Sub ComboBox1_Change()
+
+End Sub
+
+Private Sub CommandButton1_Click()
+
+    Call updateScedule
+
+End Sub
+
+Private Sub meetingRooms_ComboBox_Change()
+
+    Call updateScedule
+
+End Sub
